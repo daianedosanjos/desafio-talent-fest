@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const MainCards = styled.main`
+  background-color: var(--darkBlue);
+  @media (min-width: 1000px) {
+    margin: auto;
+    width: 70%;
+  }
+`;
+
 export const ContainerCards = styled.section`
   display: flex;
   flex-direction: ${(props) => (props.vertical ? "row" : "column")};
@@ -11,7 +19,7 @@ export const ContainerCards = styled.section`
 `;
 
 export const Card = styled.section`
-  width: ${(props) => (props.vertical ? "45vw" : "80vw")};
+  width: ${(props) => (props.vertical ? "40vw" : "80vw")};
   height: ${(props) => (props.vertical ? "25rem" : "15rem")};
   flex-direction: ${(props) => (props.vertical ? "column" : "row")};
   justify-content: space-between;
@@ -25,39 +33,27 @@ export const Card = styled.section`
     width: ${(props) => (props.vertical ? "20rem" : "40rem")};
     height: ${(props) => (props.vertical ? "40rem" : "20rem")};
   }
-
-  @media (min-width: 1200px) {
-    width: ${(props) => (props.vertical ? "40rem" : "80vw")};
-    height: ${(props) => (props.vertical ? "60rem" : "30rem")};
-  }
 `;
 
 export const Carrossel = styled.div`
   display: flex;
   justify-content: center;
-  width: ${(props) => (props.vertical ? "100%" : "40vw")};
+  width: ${(props) => (props.vertical ? "40vw" : "40vw")};
   height: 100%;
 
+  img {
+    width: ${(props) => (props.vertical ? "40vw" : "40vw")};
+    height: 100%;
+  }
+
   @media (min-width: 700px) {
-    width: ${(props) => (props.vertical ? "100%" : "20rem")};
-    /* height: ${(props) => (props.vertical ? "80px" : "25rem")}; */
+    width: ${(props) => (props.vertical ? "20px" : "320px")};
+    height: ${(props) => (props.vertical ? "50px" : "20rem")};
 
     img {
-      width: ${(props) => (props.vertical ? "100%" : "20rem")};
-      height: ${(props) => (props.vertical ? "30%" : "25rem")};
-      
+      width: ${(props) => (props.vertical ? "20px" : "320px")};
+      height: ${(props) => (props.vertical ? "50px" : "20rem")};
     }
-
-    @media (min-width: 1200px) {
-    width: ${(props) => (props.vertical ? "100vw" : "30vw")};
-    height: ${(props) => (props.vertical ? "60rem" : "30rem")};
-  }
-  }
-
-  img {
-    width: ${(props) => (props.vertical ? "100%" : "40vw")};
-    height: 100%;
-    border-radius: 10px;
   }
 `;
 
@@ -71,11 +67,10 @@ export const InfoCar = styled.section`
   padding: 0.2rem;
   width: ${(props) => (props.vertical ? "100%" : "40vw")};
 
-  
-  @media (min-width: 1200px) {
+  @media (min-width: 700px) {
     width: ${(props) => (props.vertical ? "100vw" : "30vw")};
     height: ${(props) => (props.vertical ? "60rem" : "30rem")};
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 
@@ -101,18 +96,16 @@ export const ButtonCurrentPage = styled.button`
   width: 1.2rem;
   height: 0.2rem;
   font-weight: bold;
-  padding: .5rem;
-  font-size: .5rem;
+  padding: 0.8rem;
+  font-size: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (min-width: 600px) {
-    padding: .8rem;
-    font-size: .8rem;
-    
+    padding: 0.8rem;
+    font-size: 0.8rem;
   }
-
 `;
 
 export const FinancingButton = styled.button`
@@ -122,14 +115,6 @@ export const FinancingButton = styled.button`
   @media (min-width: 700px) {
     padding: 0.5rem;
   }
-
-  @media (min-width: 1200px) {
-    padding: 1rem;
-    margin: .5rem;
-    font-size: 0.8rem;
-  }
-
-
 `;
 export const ContactsButton = styled.button`
   background-color: transparent;
@@ -139,12 +124,6 @@ export const ContactsButton = styled.button`
 
   @media (min-width: 700px) {
     padding: 0.5rem;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 1rem;
-    margin: .5rem;
-    font-size: 0.8rem;
   }
 `;
 
@@ -159,24 +138,9 @@ export const Filter = styled.div`
   select {
     padding: 0.1px;
     line-height: 0.1rem;
-
-    @media (min-width: 1200px) {
-    font-size: 1.4rem;    
-  }
   }
 
   div {
     padding: 0.2rem;
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 1.4rem;    
-  }
-
-  button{
-    @media (min-width: 1200px) {
-    font-size: 1rem;  
-    padding: .5rem;  
-  }
   }
 `;

@@ -19,6 +19,7 @@ import {
   Filter,
   FinancingButton,
   InfoCar,
+  MainCards,
 } from "./Cards.styled";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
@@ -29,7 +30,7 @@ import { CiGrid2H } from "react-icons/ci";
 const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(6);
-  const [options] = useState([6,10, 20, 30, 50]);
+  const [options] = useState([6 ,12, 18, 32, 50]);
   const [verticalLayout, setVerticalLayout] = useState(true);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -50,23 +51,21 @@ const Cards = () => {
       const validBrand = !brand || carro.veiculo_marca === brand;
       const validModel = !model || carro.modelo_nome_pai === model;
       const validExchange = !exchange || carro.veiculo_cambio === exchange;
-      const validYear = !year || carro.ano_fabricacao === parseInt(year);
-
+      const validYear = !year || carro.ano_fabricacao === parseInt(year)     
+  
       return validBrand && validModel && validExchange && validYear;
   });
 
-  const indexOfLastCard = currentPage * cardsPerPage; // ultimo
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage; // primeiro
+  const indexOfLastCard = currentPage * cardsPerPage; 
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage; 
   const currentCards = carrosFiltrados.slice(indexOfFirstCard, indexOfLastCard);
   console.log(currentCards);
 
-
-  // Obtém as opções únicas de marca e modelo para preencher os selects
   const uniqueBrand = Array.from(new Set(data.map((carro) => carro.veiculo_marca)));
   const uniqueModel = Array.from(new Set(data.map((carro) => carro.modelo_nome_pai)));
   const uniqueExchange = Array.from(new Set(data.map((carro) => carro.veiculo_cambio)));
-  const uniqueYear = Array.from(new Set(data.map((carro) => carro.ano_fabricacao))
-  );
+  const uniqueYear = Array.from(new Set(data.map((carro) => carro.ano_fabricacao)));
+  uniqueYear.sort();
 
   const clearFilter = () => {
     setBrand("");
@@ -78,12 +77,13 @@ const Cards = () => {
   return (
     <div>
       <Header />
+      <MainCards>
       <Filter>
         <div>
           <button onClick={toggleLayout}>{buttonText}</button>
           <div>
           <label>
-            <span>Cards por página</span>
+            <span>Cards por página: </span>
             <select
               value={cardsPerPage}
               onChange={(e) => setCardsPerPage(e.target.value)}
@@ -106,7 +106,7 @@ const Cards = () => {
               <option value="">Todas</option>
               {uniqueBrand.map((brand) => (
                 <option key={brand} value={brand}>
-                  {brand}
+                  { brand}
                 </option>
               ))}
             </select>
@@ -148,7 +148,7 @@ const Cards = () => {
             <select value={year} onChange={(e) => setYear(e.target.value)}>
               <option value="">Todos</option>
               {uniqueYear.map((year) => (
-                <option key={year} value={year}>
+                <option key={year}value={year}>
                   {year}
                 </option>
               ))}
@@ -174,7 +174,7 @@ const Cards = () => {
                 >
                   {item.veiculo_foto.map((img) => (
                     <SwiperSlide key={img.id}>
-                      <img src={img} alt="" />
+                      <img src={img} alt="fotos dos carros" />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -190,18 +190,18 @@ const Cards = () => {
                 <p>
                   {item.ano_fabricacao}/{item.ano_modelo}
                 </p>
+                               <p>{Number(item.veiculo_km).toLocaleString()} Km</p>
+                <p>
+                  {" "}
+                  <SiGooglemaps />
+                  {item.veiculo_cidade}
+                </p>
                 <h3>
                   {Number(item.veiculo_valor).toLocaleString("pt-br", {
                     style: "currency",
                     currency: "BRL",
                   })}
                 </h3>
-                <p>{Number(item.veiculo_km).toLocaleString()} Km</p>
-                <p>
-                  {" "}
-                  <SiGooglemaps />
-                  {item.veiculo_cidade}
-                </p>
                 <div>
                   <FinancingButton>
                     <Link to="financiamento">Simular Financiamento</Link>
@@ -227,6 +227,7 @@ const Cards = () => {
           )
         )}
       </ContainerButtonCurrentPage>
+      </MainCards>
     </div>
   );
 };
